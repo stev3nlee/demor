@@ -1,0 +1,208 @@
+<?php
+
+namespace App\Mail;
+
+use Illuminate\Bus\Queueable;
+use Illuminate\Mail\Mailable;
+use Illuminate\Queue\SerializesModels;
+use Illuminate\Contracts\Queue\ShouldQueue;
+
+class EmailOrderAdmin extends Mailable implements ShouldQueue
+{
+    use Queueable, SerializesModels;
+
+    /**
+     * Create a new message instance.
+     *
+     * @return void
+     */
+	 
+	protected $data;
+	
+    public function __construct($data)
+    {
+        $this->data = $data;
+    }
+
+    /**
+     * Build the message.
+     *
+     * @return $this
+     */
+    public function build()
+    {
+		ini_set('max_execution_time', 120);
+		$body = "";
+		$action = '<div style="border-top: 1px solid #b69bbc; padding-top: 30px; margin: 30px 0;">
+					<div style="margin-bottom: 15px;">
+						<div style="display:inline-block; width: 190px; font : 300 14px/18px \'Lucida Grande\', Lucida Sans, Lucida Sans Unicode, sans-serif, Arial, Helvetica, Verdana, sans-serif; font-size: 14px; color: #424242; line-height: 25px; font-weight: bold;">ORDER NO.</div>			
+						<div style="display:inline-block; width: 190px; font : 300 14px/18px \'Lucida Grande\', Lucida Sans, Lucida Sans Unicode, sans-serif, Arial, Helvetica, Verdana, sans-serif; font-size: 14px; color: #424242; line-height: 25px; font-weight: bold;">'.$this->data->orderheader[0]->orderno.'</div>
+					</div>';
+		$action1 = ''; $action2 = ''; $action3 = ''; $action4 = ''; 
+		
+		if($this->data->orderheader[0]->status == 'Pending')
+		{
+			$action .= '<div style="margin-bottom: 15px;">
+							<div style="display:inline-block; width: 190px; font : 300 14px/18px \'Lucida Grande\', Lucida Sans, Lucida Sans Unicode, sans-serif, Arial, Helvetica, Verdana, sans-serif; font-size: 14px; color: #424242; line-height: 25px; font-weight: bold;">PAYMENT STATUS</div>			
+							<div style="display:inline-block; width: 190px; font : 300 14px/18px \'Lucida Grande\', Lucida Sans, Lucida Sans Unicode, sans-serif, Arial, Helvetica, Verdana, sans-serif; font-size: 14px; color: #d98500; line-height: 25px; font-weight: bold;">PENDING</div>
+						</div>
+						<div>
+							<div style="display:inline-block; width: 190px; font : 300 14px/18px \'Lucida Grande\', Lucida Sans, Lucida Sans Unicode, sans-serif, Arial, Helvetica, Verdana, sans-serif; font-size: 14px; color: #424242; line-height: 25px; font-weight: bold;">SHIPPING STATUS</div>			
+							<div style="display:inline-block; width: 190px; font : 300 14px/18px \'Lucida Grande\', Lucida Sans, Lucida Sans Unicode, sans-serif, Arial, Helvetica, Verdana, sans-serif; font-size: 14px; color: #d98500; line-height: 25px; font-weight: bold;">PENDING</div>
+						</div>';
+		}
+		else if($this->data->orderheader[0]->status == 'Waiting')
+		{	
+			$action .= '<div style="margin-bottom: 15px;">
+							<div style="display:inline-block; width: 190px; font : 300 14px/18px \'Lucida Grande\', Lucida Sans, Lucida Sans Unicode, sans-serif, Arial, Helvetica, Verdana, sans-serif; font-size: 14px; color: #424242; line-height: 25px; font-weight: bold;">PAYMENT STATUS</div>			
+							<div style="display:inline-block; width: 190px; font : 300 14px/18px \'Lucida Grande\', Lucida Sans, Lucida Sans Unicode, sans-serif, Arial, Helvetica, Verdana, sans-serif; font-size: 14px; color: #d98500; line-height: 25px; font-weight: bold;">AWAITING FOR PAYMENT</div>
+						</div>
+						<div>
+							<div style="display:inline-block; width: 190px; font : 300 14px/18px \'Lucida Grande\', Lucida Sans, Lucida Sans Unicode, sans-serif, Arial, Helvetica, Verdana, sans-serif; font-size: 14px; color: #424242; line-height: 25px; font-weight: bold;">SHIPPING STATUS</div>			
+							<div style="display:inline-block; width: 190px; font : 300 14px/18px \'Lucida Grande\', Lucida Sans, Lucida Sans Unicode, sans-serif, Arial, Helvetica, Verdana, sans-serif; font-size: 14px; color: #d98500; line-height: 25px; font-weight: bold;">PENDING</div>
+						</div>';
+		}
+		else if($this->data->orderheader[0]->status == 'Paid')
+		{	
+			$action .= '<div style="margin-bottom: 15px;">
+							<div style="display:inline-block; width: 190px; font : 300 14px/18px \'Lucida Grande\', Lucida Sans, Lucida Sans Unicode, sans-serif, Arial, Helvetica, Verdana, sans-serif; font-size: 14px; color: #424242; line-height: 25px; font-weight: bold;">PAYMENT STATUS</div>			
+							<div style="display:inline-block; width: 190px; font : 300 14px/18px \'Lucida Grande\', Lucida Sans, Lucida Sans Unicode, sans-serif, Arial, Helvetica, Verdana, sans-serif; font-size: 14px; color: #22b600; line-height: 25px; font-weight: bold;">PAID</div>
+						</div>
+						<div>
+							<div style="display:inline-block; width: 190px; font : 300 14px/18px \'Lucida Grande\', Lucida Sans, Lucida Sans Unicode, sans-serif, Arial, Helvetica, Verdana, sans-serif; font-size: 14px; color: #424242; line-height: 25px; font-weight: bold;">SHIPPING STATUS</div>			
+							<div style="display:inline-block; width: 190px; font : 300 14px/18px \'Lucida Grande\', Lucida Sans, Lucida Sans Unicode, sans-serif, Arial, Helvetica, Verdana, sans-serif; font-size: 14px; color: #d98500; line-height: 25px; font-weight: bold;">ON PROCESS</div>
+						</div>';
+		}
+		else if($this->data->orderheader[0]->status == 'Ship')
+		{	
+			$action .= '<div style="margin-bottom: 15px;">
+							<div style="display:inline-block; width: 190px; font : 300 14px/18px \'Lucida Grande\', Lucida Sans, Lucida Sans Unicode, sans-serif, Arial, Helvetica, Verdana, sans-serif; font-size: 14px; color: #424242; line-height: 25px; font-weight: bold;">PAYMENT STATUS</div>			
+							<div style="display:inline-block; width: 190px; font : 300 14px/18px \'Lucida Grande\', Lucida Sans, Lucida Sans Unicode, sans-serif, Arial, Helvetica, Verdana, sans-serif; font-size: 14px; color: #22b600; line-height: 25px; font-weight: bold;">PAID</div>
+						</div>
+						<div style="margin-bottom: 15px;">
+							<div style="display:inline-block; width: 190px; font : 300 14px/18px \'Lucida Grande\', Lucida Sans, Lucida Sans Unicode, sans-serif, Arial, Helvetica, Verdana, sans-serif; font-size: 14px; color: #424242; line-height: 25px; font-weight: bold;">SHIPPING STATUS</div>			
+							<div style="display:inline-block; width: 190px; font : 300 14px/18px \'Lucida Grande\', Lucida Sans, Lucida Sans Unicode, sans-serif, Arial, Helvetica, Verdana, sans-serif; font-size: 14px; color: #22b600; line-height: 25px; font-weight: bold;">SHIPPED</div>
+						</div>
+						<div>
+							<div style="display:inline-block; width: 190px; font : 300 14px/18px \'Lucida Grande\', Lucida Sans, Lucida Sans Unicode, sans-serif, Arial, Helvetica, Verdana, sans-serif; font-size: 14px; color: #424242; line-height: 25px; font-weight: bold;">TRACKING NO</div>			
+							<div style="display:inline-block; width: 190px; font : 300 14px/18px \'Lucida Grande\', Lucida Sans, Lucida Sans Unicode, sans-serif, Arial, Helvetica, Verdana, sans-serif; font-size: 14px; color: #424242; line-height: 25px; font-weight: bold;">'.$this->data->orderheader[0]->trackingno.'</div>
+						</div>';
+		}
+		else if($this->data->orderheader[0]->status == 'Cancel')
+		{			
+			$action .= '<div style="margin-bottom: 15px;">
+							<div style="display:inline-block; width: 190px; font : 300 14px/18px \'Lucida Grande\', Lucida Sans, Lucida Sans Unicode, sans-serif, Arial, Helvetica, Verdana, sans-serif; font-size: 14px; color: #424242; line-height: 25px; font-weight: bold;">PAYMENT STATUS</div>			
+							<div style="display:inline-block; width: 190px; font : 300 14px/18px \'Lucida Grande\', Lucida Sans, Lucida Sans Unicode, sans-serif, Arial, Helvetica, Verdana, sans-serif; font-size: 14px; color: #ff4646; line-height: 25px; font-weight: bold;">CANCELLED</div>
+						</div>
+						<div>
+							<div style="display:inline-block; width: 190px; font : 300 14px/18px \'Lucida Grande\', Lucida Sans, Lucida Sans Unicode, sans-serif, Arial, Helvetica, Verdana, sans-serif; font-size: 14px; color: #424242; line-height: 25px; font-weight: bold;">SHIPPING STATUS</div>			
+							<div style="display:inline-block; width: 190px; font : 300 14px/18px \'Lucida Grande\', Lucida Sans, Lucida Sans Unicode, sans-serif, Arial, Helvetica, Verdana, sans-serif; font-size: 14px; color: #ff4646; line-height: 25px; font-weight: bold;">CANCELLED</div>
+						</div>';
+		}
+		$action1 .= '</div>
+					<div style="border-top: 1px solid #b69bbc; padding-top: 30px; margin: 30px 0;">
+						<div style="margin-bottom: 20px; font : 300 14px/18px \'Lucida Grande\', Lucida Sans, Lucida Sans Unicode, sans-serif, Arial, Helvetica, Verdana, sans-serif; font-size: 14px; color: #424242; line-height: 25px; font-weight: bold;">ORDER DETAILS</div>
+						<div style="margin-bottom: 15px;">
+							<div style="display:inline-block; width: 190px; font : 300 14px/18px \'Lucida Grande\', Lucida Sans, Lucida Sans Unicode, sans-serif, Arial, Helvetica, Verdana, sans-serif; font-size: 14px; color: #424242; line-height: 25px; font-weight: bold;">FULL NAME</div>			
+							<div style="display:inline-block; width: 190px; font : 300 14px/18px \'Lucida Grande\', Lucida Sans, Lucida Sans Unicode, sans-serif, Arial, Helvetica, Verdana, sans-serif; font-size: 12px; color: #424242; line-height: 25px;">'.$this->data->orderheader[0]->membername.'</div>
+						</div>
+						<div style="margin-bottom: 15px;">
+							<div style="display:inline-block; width: 190px; font : 300 14px/18px \'Lucida Grande\', Lucida Sans, Lucida Sans Unicode, sans-serif, Arial, Helvetica, Verdana, sans-serif; font-size: 14px; color: #424242; line-height: 25px; font-weight: bold;">ORDER TOTAL</div>			
+							<div style="display:inline-block; width: 190px; font : 300 14px/18px \'Lucida Grande\', Lucida Sans, Lucida Sans Unicode, sans-serif, Arial, Helvetica, Verdana, sans-serif; font-size: 12px; color: #424242; line-height: 25px;">IDR '.str_replace(",",".",number_format($this->data->orderheader[0]->subtotal - $this->data->orderheader[0]->vouchernominal + $this->data->orderheader[0]->conveniencefee + $this->data->orderheader[0]->shippingfee + $this->data->orderheader[0]->tax)).'</div>
+						</div>
+						<div style="margin-bottom: 15px;">
+							<div style="display:inline-block; width: 190px; font : 300 14px/18px \'Lucida Grande\', Lucida Sans, Lucida Sans Unicode, sans-serif, Arial, Helvetica, Verdana, sans-serif; font-size: 14px; color: #424242; line-height: 25px; font-weight: bold;">PAYMENT METHOD</div>			
+							<div style="display:inline-block; width: 190px; font : 300 14px/18px \'Lucida Grande\', Lucida Sans, Lucida Sans Unicode, sans-serif, Arial, Helvetica, Verdana, sans-serif; font-size: 12px; color: #424242; line-height: 25px;">'.$this->data->orderheader[0]->paymenttype.'</div>
+						</div>
+						<div style="margin-bottom: 15px;">
+							<div style="display:inline-block; width: 190px; font : 300 14px/18px \'Lucida Grande\', Lucida Sans, Lucida Sans Unicode, sans-serif, Arial, Helvetica, Verdana, sans-serif; font-size: 14px; color: #424242; line-height: 25px; font-weight: bold; vertical-align: top;">BILLING ADDRESS</div>			
+							<div style="display:inline-block; width: 190px; font : 300 14px/18px \'Lucida Grande\', Lucida Sans, Lucida Sans Unicode, sans-serif, Arial, Helvetica, Verdana, sans-serif; font-size: 12px; color: #424242; line-height: 25px;">
+								<div>'.$this->data->orderinfo[1]->address.'</div>
+								<div>'.$this->data->orderinfo[1]->city.', '.$this->data->orderinfo[1]->zipcode.'</div>
+								<div>'.$this->data->orderinfo[1]->state.', '.$this->data->orderinfo[1]->country.'</div>
+							</div>
+						</div>
+						<div>
+							<div style="display:inline-block; width: 190px; font : 300 14px/18px \'Lucida Grande\', Lucida Sans, Lucida Sans Unicode, sans-serif, Arial, Helvetica, Verdana, sans-serif; font-size: 14px; color: #424242; line-height: 25px; font-weight: bold; vertical-align: top;">SHIPPING ADDRESS</div>			
+							<div style="display:inline-block; width: 190px; font : 300 14px/18px \'Lucida Grande\', Lucida Sans, Lucida Sans Unicode, sans-serif, Arial, Helvetica, Verdana, sans-serif; font-size: 12px; color: #424242; line-height: 25px;">
+								<div>'.$this->data->orderinfo[0]->address.'</div>
+								<div>'.$this->data->orderinfo[0]->city.', '.$this->data->orderinfo[0]->zipcode.'</div>
+								<div>'.$this->data->orderinfo[0]->state.', '.$this->data->orderinfo[0]->country.'</div>
+							</div>
+						</div>
+					</div>
+					<div style="border-top: 1px solid #b69bbc; padding-top: 30px; margin: 30px 0;">
+						<div style="margin-bottom: 20px; font : 300 14px/18px \'Lucida Grande\', Lucida Sans, Lucida Sans Unicode, sans-serif, Arial, Helvetica, Verdana, sans-serif; font-size: 14px; color: #424242; line-height: 25px; font-weight: bold;">YOUR SHOPPING BAG</div>';
+		
+		foreach($this->data->orderdetail as $orderdetail){
+			$action2 .= '<div style="margin-bottom: 30px; padding-bottom: 30px; border-bottom: 1px solid #c6c6c6;">
+							<div style="display:inline-block; width: 80px; margin-right: 20px; vertical-align:top;">
+								<img src="'.$orderdetail->productimage.'" style="width:80px;"/>
+							</div>
+							<div style="display:inline-block; width: 170px; margin-right: 10px; margin-top: -5px;">
+							<div style="font : 300 14px/18px \'Lucida Grande\', Lucida Sans, Lucida Sans Unicode, sans-serif, Arial, Helvetica, Verdana, sans-serif; font-size: 15px; color: #424242; font-weight: bold; line-height: 25px; margin-bottom: 2px;">'.$orderdetail->productname.'</div>
+							<div style="font : 300 14px/18px \'Lucida Grande\', Lucida Sans, Lucida Sans Unicode, sans-serif, Arial, Helvetica, Verdana, sans-serif; font-size: 13px; color: #757575; font-style: italic; line-height: 25px; margin-bottom: 5px;">IDR '.str_replace(",",".",number_format($orderdetail->productprice)).'</div>
+							<div style="font : 300 14px/18px \'Lucida Grande\', Lucida Sans, Lucida Sans Unicode, sans-serif, Arial, Helvetica, Verdana, sans-serif; font-size: 13px; color: #757575; margin-bottom: 5px;">
+								<div style="display: inline-block; width: 60px; vertical-align: top;">Color</div>
+								<div style="display: inline-block; width: 100px;">
+									<img src="http://'.$_SERVER['SERVER_NAME']."/".$orderdetail->productcolor.'" style="width: 12px; position: relative; top: 3px;"/>
+								</div>
+							</div>
+							<div style="font : 300 14px/18px \'Lucida Grande\', Lucida Sans, Lucida Sans Unicode, sans-serif, Arial, Helvetica, Verdana, sans-serif; font-size: 13px; color: #757575; margin-bottom: 5px;">
+								<div style="display: inline-block; width: 60px;">Size</div>
+								<div style="display: inline-block; width: 100px;">'.$orderdetail->productsize.'</div>
+							</div>
+							<div style="font : 300 14px/18px \'Lucida Grande\', Lucida Sans, Lucida Sans Unicode, sans-serif, Arial, Helvetica, Verdana, sans-serif; font-size: 13px; color: #757575;">
+								<div style="display: inline-block; width: 60px;">Qty</div>
+								<div style="display: inline-block; width: 100px;">'.$orderdetail->quantity.'</div>
+							</div>
+						</div>
+						<div style="display:inline-block; width: 110px; font : 300 14px/18px \'Lucida Grande\', Lucida Sans, Lucida Sans Unicode, sans-serif, Arial, Helvetica, Verdana, sans-serif; font-size: 14px; color: #424242; line-height: 25px; text-align: right; font-weight: bold;">IDR '.str_replace(",",".",number_format(($orderdetail->productprice * $orderdetail->quantity))).'</div>
+					</div>';
+		}
+		
+		$action3 .= '<div style="margin-bottom: 30px;">
+						<div style="margin-bottom: 5px; padding: 0 20px;">
+							<div style="display:inline-block; width: 175px; font : 300 14px/18px \'Lucida Grande\', Lucida Sans, Lucida Sans Unicode, sans-serif, Arial, Helvetica, Verdana, sans-serif; font-size: 14px; color: #424242; line-height: 25px;">SUBTOTAL</div>			
+							<div style="display:inline-block; width: 175px; font : 300 14px/18px \'Lucida Grande\', Lucida Sans, Lucida Sans Unicode, sans-serif, Arial, Helvetica, Verdana, sans-serif; font-size: 14px; color: #424242; line-height: 25px; text-align: right;">IDR '.str_replace(",",".",number_format($this->data->orderheader[0]->subtotal)).'</div>
+						</div>';
+		if($this->data->orderheader[0]->voucherid != 0){
+			$action3 .= '<div style="margin-bottom: 5px; padding: 0 20px;">
+							<div style="display:inline-block; width: 175px; font : 300 14px/18px \'Lucida Grande\', Lucida Sans, Lucida Sans Unicode, sans-serif, Arial, Helvetica, Verdana, sans-serif; font-size: 14px; color: #ff4646; line-height: 25px;">VOUCHER ('.$this->data->orderheader[0]->voucher.')</div>			
+							<div style="display:inline-block; width: 175px; font : 300 14px/18px \'Lucida Grande\', Lucida Sans, Lucida Sans Unicode, sans-serif, Arial, Helvetica, Verdana, sans-serif; font-size: 14px; color: #ff4646; line-height: 25px; text-align: right;">IDR '.str_replace(",",".",number_format($this->data->orderheader[0]->vouchernominal)).'</div>
+						</div>';
+		}
+		$action4 .= '<div style="margin-bottom: 5px; padding: 0 20px;">
+							<div style="display:inline-block; width: 175px; font : 300 14px/18px \'Lucida Grande\', Lucida Sans, Lucida Sans Unicode, sans-serif, Arial, Helvetica, Verdana, sans-serif; font-size: 14px; color: #424242; line-height: 25px;">SHIPPING FEE</div>			
+							<div style="display:inline-block; width: 175px; font : 300 14px/18px \'Lucida Grande\', Lucida Sans, Lucida Sans Unicode, sans-serif, Arial, Helvetica, Verdana, sans-serif; font-size: 14px; color: #424242; line-height: 25px; text-align: right;">IDR '.str_replace(",",".",number_format($this->data->orderheader[0]->shippingfee)).'</div>
+						</div>
+						<div style="padding: 0 20px;">
+							<div style="display:inline-block; width: 175px; font : 300 14px/18px \'Lucida Grande\', Lucida Sans, Lucida Sans Unicode, sans-serif, Arial, Helvetica, Verdana, sans-serif; font-size: 14px; color: #424242; line-height: 25px;">TAX</div>			
+							<div style="display:inline-block; width: 175px; font : 300 14px/18px \'Lucida Grande\', Lucida Sans, Lucida Sans Unicode, sans-serif, Arial, Helvetica, Verdana, sans-serif; font-size: 14px; color: #424242; line-height: 25px; text-align: right;">IDR '.str_replace(",",".",number_format($this->data->orderheader[0]->tax)).'</div>
+						</div>';
+		if($this->data->orderheader[0]->paymenttype == 'VT Web'){ 
+			$action4 .= '<div style="padding: 0 20px;">
+							<div style="display:inline-block; width: 175px; font : 300 14px/18px \'Lucida Grande\', Lucida Sans, Lucida Sans Unicode, sans-serif, Arial, Helvetica, Verdana, sans-serif; font-size: 14px; color: #424242; line-height: 25px;">CONVENIENCE FEE</div>			
+							<div style="display:inline-block; width: 175px; font : 300 14px/18px \'Lucida Grande\', Lucida Sans, Lucida Sans Unicode, sans-serif, Arial, Helvetica, Verdana, sans-serif; font-size: 14px; color: #424242; line-height: 25px; text-align: right;">IDR '.str_replace(",",".",number_format($this->data->orderheader[0]->conveniencefee)).'</div>
+						</div>';
+		} 
+		$action4 .= '</div>
+					<div style="margin-bottom: 30px; background: #424242;">
+						<div style="padding: 15px 20px;">
+							<div style="display:inline-block; width: 175px; font : 300 14px/18px \'Lucida Grande\', Lucida Sans, Lucida Sans Unicode, sans-serif, Arial, Helvetica, Verdana, sans-serif; font-size: 14px; color: white; line-height: 25px;">TOTAL</div>			
+							<div style="display:inline-block; width: 175px; font : 300 14px/18px \'Lucida Grande\', Lucida Sans, Lucida Sans Unicode, sans-serif, Arial, Helvetica, Verdana, sans-serif; font-size: 14px; color: white; line-height: 25px; text-align: right;">IDR '.str_replace(",",".",number_format($this->data->orderheader[0]->subtotal - $this->data->orderheader[0]->vouchernominal + $this->data->orderheader[0]->conveniencefee + $this->data->orderheader[0]->shippingfee + $this->data->orderheader[0]->tax)).'</div>
+						</div>
+					</div>
+			</div>
+		</div>';
+
+		$payment=array(
+			"title"=>"Someone has ordered on your website"
+			,"image"=>url('assets/images/icons/email-contact.png')
+			,"body"=>$body
+			,"action"=>$action.$action1.$action2.$action3.$action4
+			,"actionText"=>""
+		);
+		return $this->view('email/defaultorder')->subject("Demor Boutique : Someone has ordered on your website")->with("data",$payment);
+    }
+}
