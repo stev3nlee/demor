@@ -244,8 +244,8 @@ class CheckoutController extends Controller
 					$password  = "demorrpxpsw";
 					$account = "803335443";
 					$result = $client->getRatesPostalCode($username,$password,'10340', $bzipcode, 'RGP', $cartcount, 0, 'JSON',$account);
+					$shipping = json_decode($result)->RPX->DATA[0]->PRICE;
 
-					$shipping = json_decode($result)->RPX->DATA->PRICE;
 				}
 				catch ( Exception $e ) {
 					echo $e->getMessage();
@@ -255,35 +255,38 @@ class CheckoutController extends Controller
 			{
 				$member = new Member;
 				$bcountryCode = $member->getCountryByCountryId($bcountry)[0]->sortname;
-				$wsdl= url('fedex/RateService_v18.wsdl');
+				$wsdl= url('fedex/RateService_v26.wsdl');
+				//$wsdl= "https://ws.fedex.com:443/web-services";
 				try {
 					ini_set("soap.wsdl_cache_enabled", "0");
 
 					$client = new \SoapClient($wsdl, array('trace' => 1));
 
-					$request['WebAuthenticationDetail'] = array(
+					$request_fedex['WebAuthenticationDetail'] = array(
 						'ParentCredential' => array(
-							'Key' => $this->getProperty('parentkey'),
-							'Password' => $this->getProperty('parentpassword')
+							//'Key' => $this->getProperty('parentkey'),
+						  	//'Password' => $this->getProperty('parentpassword')
+						  	'Key' => $this->getProperty('key'),
+						  	'Password' => $this->getProperty('password')
 						),
 						'UserCredential' => array(
 							'Key' => $this->getProperty('key'),
 							'Password' => $this->getProperty('password')
 						)
 					);
-					$request['ClientDetail'] = array(
+					$request_fedex['ClientDetail'] = array(
 						'AccountNumber' => $this->getProperty('shipaccount'),
 						'MeterNumber' => $this->getProperty('meter')
 					);
-					$request['TransactionDetail'] = array('CustomerTransactionId' => ' *** Rate Request using PHP ***');
-					$request['Version'] = array(
+					$request_fedex['TransactionDetail'] = array('CustomerTransactionId' => ' *** Rate Request using PHP ***');
+					$request_fedex['Version'] = array(
 						'ServiceId' => 'crs',
-						'Major' => '18',
+						'Major' => '26',
 						'Intermediate' => '0',
 						'Minor' => '0'
 					);
-					$request['ReturnTransitAndCommit'] = true;
-					$request['RequestedShipment'] = array(
+					$request_fedex['ReturnTransitAndCommit'] = true;
+					$request_fedex['RequestedShipment'] = array(
 						'DropoffType' => 'REGULAR_PICKUP', // valid values REGULAR_PICKUP, REQUEST_COURIER, ...
 						'ShipTimestamp' => date('c'),
 						'ServiceType' => 'INTERNATIONAL_ECONOMY',
@@ -309,8 +312,9 @@ class CheckoutController extends Controller
 					if($this->setEndpoint('changeEndpoint')){
 						$newLocation = $client->__setLocation($this->setEndpoint('endpoint'));
 					}
-					$response = $client->getRates($request);
-
+					// dd($request_fedex);
+					$response = $client->getRates($request_fedex);
+					//dd($response);
 					if ($response -> HighestSeverity != 'FAILURE' && $response -> HighestSeverity != 'ERROR'){
 						$rateReply = $response -> RateReplyDetails;
 						if($rateReply->RatedShipmentDetails && is_array($rateReply->RatedShipmentDetails)){
@@ -410,8 +414,9 @@ class CheckoutController extends Controller
 	}
 
 	public function getProperty($var){
-		if($var == 'key') Return 'RgkF85Kf8yMjBXud';
-		if($var == 'password') Return 'k83rlrSPd6JX1Nwt8XUAv5mh8';
+		//if($var == 'key') Return 'RgkF85Kf8yMjBXud';
+		if($var == 'key') Return 'NZ4aa3mxYC5D0VJZ';
+		if($var == 'password') Return 'MrvjKr7uaE5hyRazCIEqtmTg4';
 		if($var == 'shipaccount') Return '803335443';
 		if($var == 'billaccount') Return '803335443';
 		if($var == 'dutyaccount') Return '803335443';
@@ -425,8 +430,9 @@ class CheckoutController extends Controller
 		if($var == 'printlabels') Return false;
 		if($var == 'printdocuments') Return true;
 		if($var == 'packagecount') Return '4';
-
-		if($var == 'meter') Return '110603058';
+		
+		//if($var == 'meter') Return '110603058';
+		if($var == 'meter') Return '250594808';
 
 		if($var == 'shiptimestamp') Return mktime(10, 0, 0, date("m"), date("d")+1, date("Y"));
 
