@@ -297,7 +297,7 @@ class CheckoutController extends Controller
 					$request_fedex['RequestedShipment'] = array(
 						'DropoffType' => 'REGULAR_PICKUP', // valid values REGULAR_PICKUP, REQUEST_COURIER, ...
 						'ShipTimestamp' => date('c'),
-						'ServiceType' => 'INTERNATIONAL_ECONOMY',
+						'ServiceType' => 'INTERNATIONAL_PRIORITY',
 						'PackagingType' => 'YOUR_PACKAGING',
 						'TotalInsuredValue' =>array('Ammount'=>100, 'Currency'=>'USD'),
 						'Shipper' => $this->addShipper(),
