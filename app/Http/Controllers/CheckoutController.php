@@ -255,12 +255,20 @@ class CheckoutController extends Controller
 			{
 				$member = new Member;
 				$bcountryCode = $member->getCountryByCountryId($bcountry)[0]->sortname;
-				$wsdl= url('fedex/RateService_v26.wsdl');
+				$wsdl= "https://demorboutique.com/fedex/RateService_v26.wsdl";
+				//dd($wsdl);
 				//$wsdl= "https://ws.fedex.com:443/web-services";
 				try {
 					ini_set("soap.wsdl_cache_enabled", "0");
-
-					$client = new \SoapClient($wsdl, array('trace' => 1));
+					$contextOptions = array(
+					    'ssl' => array(
+					        'verify_peer' => false,
+					        'verify_peer_name' => false,
+					        'allow_self_signed' => true,
+					     )
+					);
+					$sslContext = stream_context_create($contextOptions);
+					$client = new \SoapClient($wsdl, array('stream_context' => $sslContext));
 
 					$request_fedex['WebAuthenticationDetail'] = array(
 						'ParentCredential' => array(
