@@ -46,6 +46,13 @@
 	<script type="text/javascript" src="{{URL::asset('assets/js/owl/owl.carousel.js')}}"></script>
 	<script type="text/javascript" src="{{URL::asset('assets/js/web.js')}}"></script>
 	<script src='https://www.google.com/recaptcha/api.js'></script>
+	
+	<!-- SECTIGO -->
+	<script type="text/javascript"> //<![CDATA[ 
+	  var tlJsHost = ((window.location.protocol == "https:") ? "https://secure.trust-provider.com/" : "http://www.trustlogo.com/");
+	  document.write(unescape("%3Cscript src='" + tlJsHost + "trustlogo/javascript/trustlogo.js' type='text/javascript'%3E%3C/script%3E"));
+	  //]]>
+	</script>
 
 	<!-- FONTS -->
 	<link rel="stylesheet" type="text/css" href="{{URL::asset('assets/fonts/glyphicons-halflings-regular.ttf')}}">
@@ -129,7 +136,7 @@
 	});
 
 	<?php
-		$sqlCurrency=""; $x=0; $listCurrency=""; $sqlCurrency2="";
+		$sqlCurrency=""; $x=0; $listCurrency=""; $sqlCurrency2=array();
 		foreach($currencies as $currency){
 			if($x!=0){
 				$sqlCurrency.="%2C"; $sqlCurrency2[]="'".$currency->currency_code."'";
@@ -229,6 +236,7 @@
 								</div>
 							</div>
 						</div>
+						
 						<div class="col-xs-3 col-sm-4">
 							<div class="h100">
 								<div class="tbl">
@@ -642,8 +650,13 @@
 		</div>
 	</div>
 
-	<div class="icon-comodo">
-		<img src="{{url('assets/images/icons/comodo.png') }}" class="img-responsive"/>
-	</div>
+        <div class="icon-comodo">
+	  <script language="JavaScript" type="text/javascript">
+	    TrustLogo("https://www.demorboutique.com/assets/images/icons/sectigo_trust_seal_md_106x42.png", "CL1", "none");
+	  </script>
+	  <!-- <a  href="https://ssl.comodo.com/wildcard-ssl-certificates.php" id="comodoTL">Wildcard SSL</a>-->
+        </div>
+
+
 </body>
 </html>
