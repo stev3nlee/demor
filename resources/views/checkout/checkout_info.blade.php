@@ -582,6 +582,12 @@
 														<img src="{{url($cart->productColorPath)}}" class="img-responsive" />
 													</div>
 												</div>
+												@if($cart->productLength)
+													<div class="clearfix">
+														<div class="pull-left" style="width:50px;">Length</div>
+														<div class="pull-left">{{$cart->productLength}}</div>
+													</div>
+												@endif
 												<div class="clearfix">
 													<div class="pull-left" style="width:50px;">Size</div>
 													<div class="pull-left">{{$cart->productSize}}</div>

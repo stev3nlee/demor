@@ -93,12 +93,13 @@ class AdminProductController extends Controller
 		{
 			$color->size = $product->getProductSizeByIdColor($id, $color->colorid);
 		}
-
+		$prod->length = $product->getProductLengthByProductId($id);
 		return view('admin/store/product/edit', [
 			'admin'=>$admin,
 			'product'=>$prod,
 			'categories'=>$product->getAllProductCategory(),
 			'colors'=>$product->getProductColor(),
+			'lengths'=>$product->getProductLength(),
 			'images'=>$images,
 			'breadCrumb'=>$breadCrumb
 		]);
@@ -232,6 +233,7 @@ class AdminProductController extends Controller
 		$countColor = $request->input('countColor');
 		$sizeSale = $request->input('sizeSale');
 		$colourImage = $request->input('colourImage');
+		$length = $request->input('lengthSale');
 		$genStock = [];
 		$genImage= [];
 
@@ -247,7 +249,7 @@ class AdminProductController extends Controller
 				array_push($genImage, $request->input('inputimage'.$i));
 			}
 			
-			$product->submitProduct($category, $productCode, $productName, $brandName, $price, $sale, $productDescription, $sizeChart, $sizeDetail, $sizeSale, $colourImage, $genStock, $genImage);
+			$product->submitProduct($category, $productCode, $productName, $brandName, $price, $sale, $productDescription, $sizeChart, $sizeDetail, $sizeSale, $colourImage, $genStock, $genImage, $length);
 			$request->session()->flash('message', (object)['type'=>'alert-success', 'content'=>'You have successfully added this product.']);
 			return ['success' => true];
 		}
@@ -269,17 +271,18 @@ class AdminProductController extends Controller
 		$countColor = $request->input('countColor');
 		$sizeSale = $request->input('sizeSale');
 		$colourImage = $request->input('colourImage');
+		$length = $request->input('lengthSale');
 		$genStock = [];
 		$genImage = [];
 		$genSize = [];
-
+		
 		for($i=0; $i<$countColor;$i++)
 		{
 			array_push($genStock, $request->input('genStock'.$i));
 			array_push($genImage, $request->input('inputimage'.$i));
 			array_push($genSize, $request->input('genSize'.$i));
 		}
-		$product->editProduct($productId, $reGenerate, $genSize, $category, $productCode, $productName, $brandName, $price, $sale, $productDescription, $sizeChart, $sizeDetail, $sizeSale, $colourImage, $genStock, $genImage);
+		$product->editProduct($productId, $reGenerate, $genSize, $category, $productCode, $productName, $brandName, $price, $sale, $productDescription, $sizeChart, $sizeDetail, $sizeSale, $colourImage, $genStock, $genImage, $length);
 		$request->session()->flash('message', (object)['type'=>'alert-success', 'content'=>'You have successfully edited this product.']);
 		return ['success' => true];
 	}

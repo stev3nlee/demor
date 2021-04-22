@@ -51,10 +51,17 @@
 														<img src="{{ url($cart->productColorPath) }}" class="img-responsive" />
 													</div>
 												</div>
+												@if($cart->productLength)
+												<div class="clearfix mb10">
+													<div class="pull-left w50">Length</div>
+													<div class="pull-left">{{$cart->productLength}}</div>
+												</div>
+												@endif
 												<div class="clearfix mb10">
 													<div class="pull-left w50">Size</div>
 													<div class="pull-left">{{$cart->productSize}}</div>
 												</div>
+												
 											</div>
 										</div>
 										<div class="w150 text-center hidden-xs">IDR {{str_replace(",",".",number_format($cart->productPrice))}}</div>

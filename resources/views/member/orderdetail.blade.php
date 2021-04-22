@@ -162,6 +162,12 @@
 														<img src="{{ url($detail->productcolor) }}" class="img-responsive" />
 													</div>
 												</div>
+												@if($detail->productlength)
+												<div class="clearfix mb10">
+													<div class="pull-left w50">Length</div>
+													<div class="pull-left">{{$detail->productlength}}</div>
+												</div>
+												@endif
 												<div class="clearfix mb10">
 													<div class="pull-left w50">Size</div>
 													<div class="pull-left">{{$detail->productsize}}</div>

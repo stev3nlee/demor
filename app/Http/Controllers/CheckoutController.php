@@ -243,9 +243,9 @@ class CheckoutController extends Controller
 					$username = "demorboutique";
 					$password  = "demorrpxpsw";
 					$account = "803335443";
-					$result = $client->getRatesPostalCode($username,$password,'10340', $bzipcode, 'RGP', $cartcount, 0, 'JSON',$account);
+					$result = $client->getRatesPostalCode($username,$password,'10340', $bzipcode, 'PSR', $cartcount, 0, 'JSON',$account);
 					$shipping = json_decode($result)->RPX->DATA[0]->PRICE;
-
+					$shipping = round($shipping - ($shipping * 0.15));
 				}
 				catch ( Exception $e ) {
 					echo $e->getMessage();
@@ -1013,6 +1013,7 @@ class CheckoutController extends Controller
 		$productSize = $request->input('productSize');
 		$productStock = $request->input('productStock');
 		$productQuantity = $request->input('productQuantity');
+		$length = $request->input('length') ? $request->input('length') : '';
 		$carts = [];
 
 		$cart = (object)[
@@ -1026,7 +1027,8 @@ class CheckoutController extends Controller
 			"productColorPath"=>$productColorPath,
 			"productSize"=>$productSize,
 			"productStock"=>$productStock,
-			"productQuantity"=>$productQuantity
+			"productQuantity"=>$productQuantity,
+			"productLength"=>$length
 		];
 
 		$flag = true;

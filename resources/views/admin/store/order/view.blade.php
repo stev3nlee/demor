@@ -219,6 +219,7 @@
 																	<div class="s-title">
 																		<div style="margin: 5px 0;"><div style="display: inline-block; position: relative; top: -6px; margin-right: 5px; ">Color : </div><div style="display: inline-block;"><img src="{{ url($detail->productcolor) }}" class="img-responsive"></div></div>
 																		<div>Size : {{$detail->productsize}}</div>
+																		@if($detail->productlength)<div>Length : {{$detail->productlength}}</div>@endif
 																	</div>
 																</div>
 															</div>

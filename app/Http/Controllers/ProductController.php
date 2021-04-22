@@ -109,6 +109,7 @@ class ProductController extends Controller
 
 		$prod = $product->getProductById($id)[0];
 		$prod->color = $product->getProductColorByProductId($id);
+		$prod->length = $product->getProductLengthByProductId($id);
 		$subImageCount = 0;
 		foreach($prod->color as $color)
 		{

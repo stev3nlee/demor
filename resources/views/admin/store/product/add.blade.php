@@ -13,6 +13,7 @@
 		});
 
 		var c = 0;
+		var d = 0;
 		var countColor = 0;
 		var countSize = 0;
 		var colorId = [];
@@ -55,6 +56,19 @@
 					console.log('Error:', data);
 				}
 			});
+		});
+
+		$('#addLength').click(function(){
+				var clone = $('#hiddenLength').clone().removeAttr('id').removeClass('hidden').attr('id', 'lh'+d);
+				clone.find('.deleteLength').attr('data-value', d);
+				$('#lengthTemp').append(clone);
+				//countSize++;
+				d++;
+
+				$('.deleteLength').unbind().click(function(){
+					$('#lh'+$(this).attr('data-value')).remove();
+					//countSize--;
+				});
 		});
 
 		$('#addSize').click(function(){
@@ -300,6 +314,20 @@
 						</div>
 					</div>
 					<div class="form-group">
+						<div class="display-inline mr10"><button type="button" class="btn btn-small" id="addLength">Add</button></div>
+						<div class="display-inline pos-det">Length</div>
+						<div id="lengthTemp" class="display-inline">
+							<div class="display-inline mr10 hidden" id="hiddenLength">
+								<div class="display-inline" style="margin-right: 5px;">
+									<input type="text" name="lengthSale[]" class="form-control" style="width: 50px;"/>
+								</div>
+								<div class="display-inline deleteLength" style="position: relative; top: 8px; ">
+									<div class="icon-incorrect"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
 						<div class="mb20">
 							<div class="display-inline mr10"><a class="fancybox" href="#color"><button type="button" class="btn btn-small">Add</button></a></div>
 							<div class="display-inline pos-det">Colour Image <span class="red">*</span></div>
@@ -382,7 +410,7 @@
 					</div>
 					<div class="form-group mb30">
 						<label>Size Detail <span class="red">*</span></label>
-						<textarea id="mceFixed2" class="sizeChart" name="sizeChart">
+						<textarea id="mceFixed2" class="sizeDetail" name="sizeDetail">
 							<table width="450px" class="mce-item-table" data-mce-selected="2">
 							    <tbody>
 							        <tr>

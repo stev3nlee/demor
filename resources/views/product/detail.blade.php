@@ -282,6 +282,21 @@
 									<input type="hidden" name="productSize" value="0">
 									<input type="hidden" name="productStock" value="0">
 									<input type="hidden" name="productQuantity" value="0">
+
+									@if(count($product->length)>0)
+												<label>Length</label>
+												<div class="custom-select w200">
+													<div class="replacement">Select Length</div>
+													<select name="length" >
+														<option value="" selected>Select Length</option>
+														@foreach($product->length as $len)
+															<option value="{{$len->length}}">{{$len->length}}</option>
+														@endforeach
+													</select>
+												</div>
+									<br>
+									@endif
+
 									@foreach($product->color as $index => $color)
 										<div class="content-img tab-{{$index+1}} @if($index+1 == 1) current @endif">
 											<div class="pull-left detail20">

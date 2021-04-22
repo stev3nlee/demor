@@ -62,7 +62,7 @@ class Order
 		]);
 		foreach($general->cart as $cart)
 		{
-			DB::insert('insert into orderdetail values(?, ?, ?, ?, ?, ?, ?, ?, ?)', [
+			DB::insert('insert into orderdetail values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [
 				$orderno,
 				$cart->productId,
 				$cart->productColor,
@@ -71,6 +71,7 @@ class Order
 				$cart->productColorPath,
 				$cart->productPrice,
 				$cart->productSize,
+				$cart->productLength,
 				$cart->productQuantity
 			]);
 		}

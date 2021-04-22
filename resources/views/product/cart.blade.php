@@ -189,6 +189,12 @@
 															<div class="pull-left w50">Size</div>
 															<div class="pull-left">{{$cart->productSize}}</div>
 														</div>
+														@if($cart->productLength)
+														<div class="clearfix mb10">
+															<div class="pull-left w50">Length</div>
+															<div class="pull-left">{{$cart->productLength}}</div>
+														</div>
+														@endif
 														@if($cart->productStock != 0)
 															<div class="stock">IN STOCK </div>
 														@else

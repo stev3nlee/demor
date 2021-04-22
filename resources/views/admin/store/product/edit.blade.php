@@ -12,6 +12,7 @@ $(function() {
 		$('#product').addClass ('active');
 		
 		var c = 0;
+		var d = 0;
 		var countColor = 0;
 		var countSize = 0;
 		var colorId = [];
@@ -96,6 +97,19 @@ $(function() {
 			}
 		});
 		
+		$('#addLength').click(function(){
+				var clone = $('#hiddenLength').clone().find("input:text").val("").end().removeAttr('id').removeClass('hidden').attr('id', 'lh'+d);
+				clone.find('.deleteLength').attr('data-value', d);
+				$('#lengthTemp').append(clone);
+				//countSize++;
+				d++;
+
+				$('.deleteLength').unbind().click(function(){
+					$('#lh'+$(this).attr('data-value')).remove();
+					//countSize--;
+				});
+		});
+
 		$('#addSize').click(function(){
 			if(countSize < 5)
 			{
@@ -284,6 +298,24 @@ $(function() {
 									<input type="text" required class="form-control txtboxToFilter" maxlength="9" name="totalPrice" value="{{ $product->price * $product->discount / 100 }}" disabled/>
 								</div>	
 							</div>	
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="display-inline mr10"><button type="button" class="btn btn-small" id="addLength">Add</button></div>
+						<div class="display-inline pos-det">Length</div>
+						<div id="lengthTemp" class="display-inline">
+							@foreach($product->length as $len)
+							<div class="display-inline mr10" id="hiddenLength">
+								<div class="display-inline" style="margin-right: 5px;">
+									
+									<input type="text" name="lengthSale[]" class="form-control" value="{{ $len->length }}" style="width: 50px;"/>
+									
+								</div>
+								<div class="display-inline deleteLength" style="position: relative; top: 8px; ">
+									<div class="icon-incorrect"></div>
+								</div>
+							</div>
+							@endforeach
 						</div>
 					</div>
 					<div class="form-group">

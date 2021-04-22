@@ -154,9 +154,9 @@ class Product
 		DB::delete('delete from product_detail where productid = ?', [$id]);
 		
 	}
-	public function submitProduct($category, $productCode, $productName, $brandName, $price, $sale, $productDescription, $sizeChart, $sizeDetail, $sizeSale, $colourImage, $genStock, $genImage)
+	public function submitProduct($category, $productCode, $productName, $brandName, $price, $sale, $productDescription, $sizeChart, $sizeDetail, $sizeSale, $colourImage, $genStock, $genImage, $length)
 	{
-		DB::insert('insert into product(categoryid, productcode, productname, brandname, price, discount, productdescription, sizechart, sizedetail, insertdate, updatedate, isdeleted) values(?, ?, ?, ?, ?, ?, ?, ?, now(), now(), 1)',
+		DB::insert('insert into product(categoryid, productcode, productname, brandname, price, discount, productdescription, sizechart, sizedetail, insertdate, updatedate, isdeleted) values(?, ?, ?, ?, ?, ?, ?, ?, ?, now(), now(), 1)',
 						[$category, $productCode, $productName, $brandName, $price, $sale, $productDescription, $sizeChart, $sizeDetail]);
 		$id = DB::select('select * from product order by productid desc limit 0, 1')[0]->productid;
 		for($i = 1; $i < count($colourImage); $i++){
@@ -169,8 +169,14 @@ class Product
 				DB::insert('insert into product_detail_size values(?, ?, ?, ?)', [$id, $colourImage[$i], $sizeSale[$j+1], $genStock[$i-1][$j]]);
 			}
 		}
+		foreach($length as $le){
+			if($le != ''){
+			DB::insert('insert into product_length(productid, length) values(?, ?)',
+						[$id, $le]);
+			}
+		}
 	}
-	public function editProduct($productId, $reGenerate, $genSize, $category, $productCode, $productName, $brandName, $price, $sale, $productDescription, $sizeChart, $sizeDetail, $sizeSale, $colourImage, $genStock, $genImage)
+	public function editProduct($productId, $reGenerate, $genSize, $category, $productCode, $productName, $brandName, $price, $sale, $productDescription, $sizeChart, $sizeDetail, $sizeSale, $colourImage, $genStock, $genImage, $length)
 	{
 		DB::update('update product set categoryid = ?, productname = ?, brandname = ?, price = ?, discount = ?, productdescription = ?, sizechart = ?,  sizedetail = ?, updatedate = now() where productid = ?',
 						[$category, $productName, $brandName, $price, $sale, $productDescription, $sizeChart, $sizeDetail, $productId]);
@@ -179,6 +185,7 @@ class Product
 			DB::delete('delete from product_detail where productid = ?', [$productId]);
 			DB::delete('delete from product_detail_image where productid = ?', [$productId]);
 			DB::delete('delete from product_detail_size where productid = ?', [$productId]);
+			DB::delete('delete from product_length where productid = ?', [$productId]);
 			for($i = 1; $i < count($colourImage); $i++){
 				DB::insert('insert into product_detail (productid, colorid, mainimage, subimage) select ?, ?, main, back from terminate_product_image where imageid = ?',
 							[$productId, $colourImage[$i], $genImage[$i-1]]);
@@ -189,13 +196,27 @@ class Product
 					DB::insert('insert into product_detail_size values(?, ?, ?, ?)', [$productId, $colourImage[$i], $sizeSale[$j+1], $genStock[$i-1][$j]]);
 				}
 			}
+
+			foreach($length as $le){
+				if($le != ''){
+				DB::insert('insert into product_length(productid, length) values(?, ?)',
+							[$productId, $le]);
+				}
+			}
 		}
 		else
 		{
 			DB::delete('delete from product_detail_size where productid = ?', [$productId]);
+			DB::delete('delete from product_length where productid = ?', [$productId]);
 			for($i = 1; $i < count($colourImage); $i++){
 				for($j = 0; $j < count($genStock[$i-1]); $j++){
 					DB::insert('insert into product_detail_size values(?, ?, ?, ?)', [$productId, $colourImage[$i], $genSize[$i-1][$j], $genStock[$i-1][$j]]);
+				}
+			}
+			foreach($length as $le){
+				if($le != ''){
+				DB::insert('insert into product_length(productid, length) values(?, ?)',
+							[$productId, $le]);
 				}
 			}
 		}
@@ -263,5 +284,12 @@ class Product
 	public function deleteProductValidate($const, $id)
 	{
 		return DB::select("select * from product a join product_detail b on a.productid = b.productid where case ? when 'category' then categoryid else colorid end = ?", [$const, $id]);
+	}
+	public function getProductLength()
+	{
+		return DB::select('select * from product_length');
+	}
+	public function getProductLengthByProductId($productid){
+		return DB::select('select length from product_length where productid = ?', [$productid]);
 	}
 }
