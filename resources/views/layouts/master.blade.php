@@ -24,7 +24,7 @@
 	<link rel="stylesheet" type="text/css" href="{{URL::asset('assets/js/owl/owl.transitions.css')}}">
 	<link rel="stylesheet" type="text/css" href="{{URL::asset('assets/js/owl/owl.carousel.css')}}">
 	<link rel="stylesheet" type="text/css" href="{{URL::asset('assets/css/fonts.css')}}">
-	<link rel="stylesheet" type="text/css" href="{{URL::asset('assets/css/style.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{URL::asset('assets/css/style.css?v.2')}}">
 
 	<!-- JS-->
 	<script>var site_url = '';</script>
