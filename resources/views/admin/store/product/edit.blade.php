@@ -304,6 +304,14 @@ $(function() {
 						<div class="display-inline mr10"><button type="button" class="btn btn-small" id="addLength">Add</button></div>
 						<div class="display-inline pos-det">Length</div>
 						<div id="lengthTemp" class="display-inline">
+							<div class="display-inline mr10 hidden" id="hiddenLength">
+								<div class="display-inline" style="margin-right: 5px;">
+									<input type="text" name="lengthSale[]" class="form-control" style="width: 50px;"/>
+								</div>
+								<div class="display-inline deleteLength" style="position: relative; top: 8px; ">
+									<div class="icon-incorrect"></div>
+								</div>
+							</div>
 							@foreach($product->length as $len)
 							<div class="display-inline mr10" id="hiddenLength">
 								<div class="display-inline" style="margin-right: 5px;">
