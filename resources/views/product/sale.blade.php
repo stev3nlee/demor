@@ -101,7 +101,7 @@
 								</div>
 								<ul class="list-color">
 									@foreach($product->color as $color)
-										<li><img src="{{ url($color->colorpath) }}" class="img-responsive"/></li>
+										<li><img style="width:22px; height:22px;" src="{{ url($color->colorpath) }}" class="img-responsive"/></li>
 									@endforeach
 								</ul>
 							</div>
