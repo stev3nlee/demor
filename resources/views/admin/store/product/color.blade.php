@@ -72,7 +72,7 @@
 							<input type="hidden" name="_token" value="{{ csrf_token() }}">
 							<input type="file" name="addColor" />
 							<div class="mt5 ">Tipe File : jpg, jpeg, gif, png</div>
-							<div>Pic Resolution : 22 x 22 pixels</div>
+							<div>Pic Resolution : 150 x 150 pixels</div>
 						</div>						
 					</div>
 					<div>
