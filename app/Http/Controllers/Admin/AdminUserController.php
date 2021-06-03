@@ -121,7 +121,7 @@ class AdminUserController extends Controller
 			(object)['name' =>'Add Group', 'path'=>'admin/settings/useraccount/addrole']
 		];
 		
-		$totalMenu = 24;
+		$totalMenu = 26;
 		$actualMenus = [];
 		for($i=0; $i<$totalMenu; $i++)
 		{
@@ -148,7 +148,7 @@ class AdminUserController extends Controller
 		];
 		
 		$user = new User;
-		$totalMenu = 24;
+		$totalMenu = 26;
 		$menus = $user->getMenuByRoleId($roleId);
 		$actualMenus = [];
 		$count = 0;
