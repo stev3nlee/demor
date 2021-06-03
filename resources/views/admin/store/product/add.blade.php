@@ -430,7 +430,7 @@
 									<th width="450px">12-16-42</th>
 								</tr>
 								<tr>
-									<th>&nbsp;</th>
+								<th>&nbsp;</th>
 									<th>XS</th>
 									<th>S</th>
 									<th>M</th>
@@ -438,24 +438,24 @@
 									<th>XL</th>
 								</tr>
 								<tr>
-									<th width="450px">Bust</th>
-									<td>81cm</td>
+								<th width="450px">Bust</th>
+									<td>86cm</td>
 									<td>89cm</td>
-									<td>96cm</td>
-									<td>100cm</td>
+									<td>97cm</td>
+									<td>102cm</td>
 									<td>110cm</td>
 								</tr>
 								<tr>
-									<th width="450px">Waist</th>
-									<td>64cm</td>
-									<td>72cm</td>
+								<th width="450px">Waist</th>
+									<td>66cm</td>
+									<td>77cm</td>
 									<td>81cm</td>
 									<td>90cm</td>
 									<td>100cm</td>
 								</tr>
 								<tr>
 								<th width="450px">Hips</th>
-									<td>89cm</td>
+									<td>90cm</td>
 									<td>97cm</td>
 									<td>104cm</td>
 									<td>112cm</td>
