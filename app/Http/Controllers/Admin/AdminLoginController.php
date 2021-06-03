@@ -26,7 +26,7 @@ class AdminLoginController extends Controller
 		if(count($users) == 1)
 		{
 			$menus = $user->getUserMenuAuthentication($users[0]->roleid);
-			$totalMenu = 24;
+			$totalMenu = 26;
 			$count = 0;
 			$actualMenus = [];
 			for($i=0; $i<$totalMenu; $i++)

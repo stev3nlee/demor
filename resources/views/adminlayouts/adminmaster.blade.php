@@ -142,16 +142,20 @@
 								</a>
 							</li>
 							@endif
+							@if($admin->menus[25] == 1)
 							<li id="currency">
 								<a href="{{ url('/meisjejongetje/pages/currency') }}">
 									<div class="link">Currency</div>
 								</a>
 							</li>
+							@endif
+							@if($admin->menus[24] == 1)
 							<li id="popup">
 								<a href="{{ url('/meisjejongetje/pages/popup') }}">
 									<div class="link">Pop Up</div>
 								</a>
 							</li>
+							@endif
 							@if($admin->menus[8] == 1)
 							<li id="footer">
 								<a href="{{ url('/meisjejongetje/pages/footer') }}">

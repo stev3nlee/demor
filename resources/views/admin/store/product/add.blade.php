@@ -370,50 +370,42 @@
 					<div class="form-group mb30">
 						<label>Size Chart <span class="red">*</span></label>
 						<textarea id="mceFixed2" class="sizeChart" name="sizeChart">
-						<table width="550px" class="mce-item-table" data-mce-selected="1">
+						<table width="300px" class="mce-item-table" data-mce-selected="1">
 							<tbody>
 								<tr>
-									<th width="550px">USA-UK-EU</th>
-									<th width="450px">4-8-34</th>
-									<th width="450px">6-10-36</th>
-									<th width="450px">8-12-38</th>
-									<th width="450px">10-14-40</th>
-									<th width="450px">12-16-42</th>
+									<th width="100px">&nbsp;</th>
+									<th width="100px">XS</th>
+									<th width="100px">S</th>
+									<th width="100px">M</th>
+									<th width="100px">L</th>
+									<th width="100px">XL</th>
 								</tr>
 								<tr>
-									<th>&nbsp;</th>
-									<th>XS</th>
-									<th>S</th>
-									<th>M</th>
-									<th>L</th>
-									<th>XL</th>
+									<th width="100px">EU</th>
+									<td>34</td>
+									<td>36</td>
+									<td>38</td>
+									<td>40</td>
+									<td>42</td>
 								</tr>
 								<tr>
-									<th width="450px">Bust</th>
-									<td>81cm</td>
-									<td>89cm</td>
-									<td>96cm</td>
-									<td>100cm</td>
-									<td>110cm</td>
+									<th width="100px">UK</th>
+									<td>8</td>
+									<td>10</td>
+									<td>12</td>
+									<td>14</td>
+									<td>16</td>
 								</tr>
 								<tr>
-									<th width="450px">Waist</th>
-									<td>64cm</td>
-									<td>72cm</td>
-									<td>81cm</td>
-									<td>90cm</td>
-									<td>100cm</td>
+									<th width="100px">USA</th>
+									<td>4</td>
+									<td>6</td>
+									<td>8</td>
+									<td>10</td>
+									<td>12</td>
 								</tr>
-								<tr>
-									<th width="450px">Hips</th>
-									<td>89cm</td>
-									<td>97cm</td>
-									<td>104cm</td>
-									<td>112cm</td>
-									<td>122cm</td>
-								</tr>
-								</tbody>
-							</table>
+							</tbody>
+						</table>
 						</textarea>
 					</div>
 					<div class="form-group mb30">
