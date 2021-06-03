@@ -370,40 +370,48 @@
 					<div class="form-group mb30">
 						<label>Size Chart <span class="red">*</span></label>
 						<textarea id="mceFixed2" class="sizeChart" name="sizeChart">
-							<table width="300px" class="mce-item-table" data-mce-selected="1">
-								<tbody>
-									<tr>
-										<th width="100px">&nbsp;</th>
-										<th width="100px">XS</th>
-										<th width="100px">S</th>
-										<th width="100px">M</th>
-										<th width="100px">L</th>
-										<th width="100px">XL</th>
-									</tr>
-									<tr>
-										<th width="100px">EU</th>
-										<td>34</td>
-										<td>36</td>
-										<td>38</td>
-										<td>40</td>
-										<td>42</td>
-									</tr>
-									<tr>
-										<th width="100px">UK</th>
-										<td>8</td>
-										<td>10</td>
-										<td>12</td>
-										<td>14</td>
-										<td>16</td>
-									</tr>
-									<tr>
-										<th width="100px">USA</th>
-										<td>4</td>
-										<td>6</td>
-										<td>8</td>
-										<td>10</td>
-										<td>12</td>
-									</tr>
+						<table width="550px" class="mce-item-table" data-mce-selected="1">
+							<tbody>
+								<tr>
+									<th width="550px">USA-UK-EU</th>
+									<th width="450px">4-8-34</th>
+									<th width="450px">6-10-36</th>
+									<th width="450px">8-12-38</th>
+									<th width="450px">10-14-40</th>
+									<th width="450px">12-16-42</th>
+								</tr>
+								<tr>
+									<th>&nbsp;</th>
+									<th>XS</th>
+									<th>S</th>
+									<th>M</th>
+									<th>L</th>
+									<th>XL</th>
+								</tr>
+								<tr>
+									<th width="450px">Bust</th>
+									<td>81cm</td>
+									<td>89cm</td>
+									<td>96cm</td>
+									<td>100cm</td>
+									<td>110cm</td>
+								</tr>
+								<tr>
+									<th width="450px">Waist</th>
+									<td>64cm</td>
+									<td>72cm</td>
+									<td>81cm</td>
+									<td>90cm</td>
+									<td>100cm</td>
+								</tr>
+								<tr>
+									<th width="450px">Hips</th>
+									<td>89cm</td>
+									<td>97cm</td>
+									<td>104cm</td>
+									<td>112cm</td>
+									<td>122cm</td>
+								</tr>
 								</tbody>
 							</table>
 						</textarea>
@@ -411,40 +419,50 @@
 					<div class="form-group mb30">
 						<label>Size Detail <span class="red">*</span></label>
 						<textarea id="mceFixed2" class="sizeDetail" name="sizeDetail">
-							<table width="450px" class="mce-item-table" data-mce-selected="2">
-							    <tbody>
-							        <tr>
-							            <th width="450px">&nbsp;</th>
-							            <th width="450px">Small (cm)</th>
-							            <th width="450px">Medium (cm)</th>
-							            <th width="450px">Large (cm)</th>
-							        </tr>
-							        <tr>
-							            <th width="450px">UK-USA-Europe</th>
-							            <td>8-4-34</td>
-							            <td>10-6-36</td>
-							            <td>14-10-40</td>
-							        </tr>
-							        <tr>
-							            <th width="450px">Bust</th>
-							            <td>86</td>
-							            <td>91</td>
-							            <td>96</td>
-							        </tr>
-							        <tr>
-							            <th width="450px">Waist</th>
-							            <td>66-71</td>
-							            <td>71-76</td>
-							            <td>76-81</td>
-							        </tr>
-							        <tr>
-							            <th width="450px">Hips</th>
-							            <td>91</td>
-							            <td>96</td>
-							            <td>101</td>
-							        </tr>
-							    </tbody>
-							</table>
+						<table width="550px" class="mce-item-table" data-mce-selected="2">
+							<tbody>
+								<tr>
+									<th width="550px">USA-UK-EU</th>
+									<th width="450px">4-8-34</th>
+									<th width="450px">6-10-36</th>
+									<th width="450px">8-12-38</th>
+									<th width="450px">10-14-40</th>
+									<th width="450px">12-16-42</th>
+								</tr>
+								<tr>
+									<th>&nbsp;</th>
+									<th>XS</th>
+									<th>S</th>
+									<th>M</th>
+									<th>L</th>
+									<th>XL</th>
+								</tr>
+								<tr>
+									<th width="450px">Bust</th>
+									<td>81cm</td>
+									<td>89cm</td>
+									<td>96cm</td>
+									<td>100cm</td>
+									<td>110cm</td>
+								</tr>
+								<tr>
+									<th width="450px">Waist</th>
+									<td>64cm</td>
+									<td>72cm</td>
+									<td>81cm</td>
+									<td>90cm</td>
+									<td>100cm</td>
+								</tr>
+								<tr>
+								<th width="450px">Hips</th>
+									<td>89cm</td>
+									<td>97cm</td>
+									<td>104cm</td>
+									<td>112cm</td>
+									<td>122cm</td>
+								</tr>
+							</tbody>
+						</table>
 						</textarea>
 					</div>
 				</div>
