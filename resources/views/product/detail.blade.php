@@ -284,16 +284,16 @@
 									<input type="hidden" name="productQuantity" value="0">
 
 									@if(count($product->length)>0)
-												<label>Length</label>
-												<div class="custom-select w200">
-													<div class="replacement">Select Length</div>
-													<select name="length" >
-														<option value="" selected>Select Length</option>
-														@foreach($product->length as $len)
-															<option value="{{$len->length}}">{{$len->length}}</option>
-														@endforeach
-													</select>
-												</div>
+										<label>Length</label>
+										<div class="custom-select w200">
+											<div class="replacement">Select Length</div>
+											<select name="length" class="custom-select" onChange="custom_select(this)">
+												<option value="" selected>Select Length</option>
+												@foreach($product->length as $len)
+													<option value="{{$len->length}}">{{$len->length}}</option>
+												@endforeach
+											</select>
+										</div>
 									<br>
 									@endif
 
