@@ -76,7 +76,11 @@
 						</tr>
 						<tr>
 							<td>Pop Up</td>
-							<td class="text-center"><input type="checkbox" name="roleMenu[]" value="" class="check-view" checked></td>
+							<td class="text-center"><input type="checkbox" name="roleMenu[]" value="24" class="check-view" @if($menu[24] == 1) checked @endif></td>
+						</tr>
+						<tr>
+							<td>Currency</td>
+							<td class="text-center"><input type="checkbox" name="roleMenu[]" value="25" class="check-view" @if($menu[25] == 1) checked @endif></td>
 						</tr>
 						<tr>
 							<td>Footer</td>

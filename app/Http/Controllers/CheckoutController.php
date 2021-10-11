@@ -245,7 +245,8 @@ class CheckoutController extends Controller
 					$account = "803335443";
 					$result = $client->getRatesPostalCode($username,$password,'10340', $bzipcode, 'PSR', $cartcount, 0, 'JSON',$account);
 					$shipping = json_decode($result)->RPX->DATA[0]->PRICE;
-					$shipping = round($shipping - ($shipping * 0.15));
+					//$shipping = round($shipping - ($shipping * 0.15));
+					$shipping = round($shipping);
 				}
 				catch ( Exception $e ) {
 					echo $e->getMessage();
