@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Models\Product;
@@ -106,6 +106,10 @@ class ProductController extends Controller
 	{
 		$general = new General;
 		$product = new Product;
+		
+		if(!$product->getProductById($id)){
+			return redirect('/');
+		} 
 
 		$prod = $product->getProductById($id)[0];
 		$prod->color = $product->getProductColorByProductId($id);
@@ -140,6 +144,8 @@ class ProductController extends Controller
 			'subImageCount'=>$subImageCount,
 			'breadCrumb'=>$breadCrumb
 		]);
+
+		if($product->getProductById($id)){ return redirect('/'); }
 	}
   public function indexcategory(Request $request,$productCategory)
   {
